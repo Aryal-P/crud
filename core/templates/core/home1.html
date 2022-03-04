@@ -5,12 +5,12 @@
 <section class ="container">
 
     <div class="row justify-content-around text-center text-white mt-5">
-        <div class="container col-sm-8">
-            <h2 >CRUD APP</h2>
+        <div class="col-sm-8">
+            <h3 >CRUD APP</h3>
         </div>
     </div>
 
-    <div class="row justify-content-around mt-3">
+    <div class="row justify-content-around mt-5">
         <div class="col-sm-8">
             <a href="{% url 'add-student' %}" class='btn btn-warning float-end'>Add</a>
         </div>
@@ -27,37 +27,44 @@
                       <th scope="col">Roll</th>
                       <th scope="col">City</th>
                       <th scope="col">Action</th>
+                      
                     </tr>
-                </thead>
-                <tbody>
+                  </thead>
+                  <tbody>
                       {% for stud in studata %}
                     <tr>
                         <th scope="row">{{forloop.counter}}</th>
                         <td>{{stud.name}}</td>
                         <td>{{stud.roll}}</td>
                         <td>{{stud.city}}</td>
-                        <td >
+                        <td class="aline-inline">
+                            
+                            <form action=" {% url 'delete-student' %}" method= "POST">
+                                {% csrf_token %}
+                    
+                                <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                                <input type="hidden" name="id" value={{stud.id}}>
+                                
+                                
+                            </form>
 
                             <table>
                                 <tr>
-                                        <form action=" {% url 'delete-student' %}" method= "POST">
-                                            {% csrf_token %}
-            
-                                            <input type="submit" value="Delete" class="btn btn-danger btn-sm">
-                                            <input type="hidden" name="id" value={{stud.id}}>
-                                            
-                                        </form>
-                                    
-                                        <a href="{% url 'update_student' stud.id %}" class="btn btn-sm btn-info" >Edit</a> 
-                                    
-                                </tr>
-                            </table>
+                                    <td>
+                                       <a href="{% url 'update_student' stud.id %}" class="btn btn-sm btn-info" >Edit</a> 
+                                    </td>
+                                </tr> 
+                             </table>
                         </td>
+
                     </tr>
                     {% endfor %}
+                   
+                 
                 </tbody>
+                
             </table>
-        </div>
+        </div
     </div>
 </section>
 
